@@ -1,0 +1,56 @@
+div id="dropzone" class="dropzone"
+= form_tag bulk_create_taggings_path do
+  = hidden_field_tag 'images[ids]', '', multiple: true
+
+  = select_tag 'images[tag_id]', {}, multiple: true, class: 'select2'
+  = submit_tag 'Save'
+
+javascript:
+  $(document).ready(function () {
+    var AUTH_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    var uploaded_ids = [];
+    Dropzone.autoDiscover = false;
+    var dropzone = new Dropzone("div#dropzone", {
+      url: "/images/file_upload",
+      uploadMultiple: true,
+      params: {
+        'authenticity_token': AUTH_TOKEN
+      },
+      successmultiple: function (data, response) {
+        uploaded_ids = uploaded_ids.concat(response.items);
+        $('#images_ids').val(uploaded_ids);
+      }
+    });
+
+    $('.select2').select2({
+      ajax: {
+        url: '/tags',
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term,
+            page: params.page
+          }
+        },
+        processResults: function (data, params) {
+          params.page = params.page || 1;
+
+          return {
+            results: data.items
+          }
+        }
+      },
+      minimumInputLength: 1,
+      escapeMarkup: function (markup) {
+        return markup;
+      },
+      templateResult: function (res) {
+        return res.name;
+      },
+      templateSelection: function (res) {
+        return res.name;
+      }
+    });
+
+  });

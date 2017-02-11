@@ -1,0 +1,10 @@
+= form_for @tag do |form|
+  .col-md-4
+    .form-group
+      label Name
+      = form.text_field :name, class: 'form-control'
+    .form-group
+      label Aliases
+      = form.text_area :virtual_aliases, hint: 'use comma to separate aliases', class: 'form-control'
+
+    = form.submit 'Save'

@@ -1,0 +1,24 @@
+= link_to 'New tag', new_tag_path, class: 'btn btn-success'
+= link_to 'Upload images', bulk_new_taggings_path, class: 'btn btn-info'
+table.table.table-hover.table-bordered
+  thead
+    th ID
+    th Name
+    th Aliases
+    th Images
+    th Actions
+  - @tags.each do |tag|
+    tr
+      td = tag.id
+      td = tag.name
+      td = tag.aliases.join(', ')
+      td = tag.taggings.count
+      td
+        = link_to 'Edit', edit_tag_path(tag), class: 'btn btn-success'
+        = link_to 'Destroy', tag
+
+b Total Images: #{@stats[:images_count]}
+br
+b Images size: #{human_size @stats[:images_size]}
+br
+b Cache size: #{human_size @stats[:cache_size]}
