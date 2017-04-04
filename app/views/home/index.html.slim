@@ -1,24 +1,36 @@
-= link_to 'New tag', new_tag_path, class: 'btn btn-success'
-= link_to 'Upload images', bulk_new_taggings_path, class: 'btn btn-info'
-table.table.table-hover.table-bordered
-  thead
-    th ID
-    th Name
-    th Aliases
-    th Images
-    th Actions
-  - @tags.each do |tag|
-    tr
-      td = tag.id
-      td = tag.name
-      td = tag.aliases.join(', ')
-      td = tag.taggings.count
-      td
-        = link_to 'Edit', edit_tag_path(tag), class: 'btn btn-success'
-        = link_to 'Destroy', tag
+.ui.vertical.stripe.segment
+  .ui.container
+    h3.ui.header Actions
+    = link_to new_tag_path, class: 'ui button green' do
+      i.tag.icon
+      | New Tag
+    = link_to bulk_new_taggings_path, class: 'ui button teal' do
+      i.upload.icon
+      | Upload Images
 
-b Total Images: #{@stats[:images_count]}
-br
-b Images size: #{human_size @stats[:images_size]}
-br
-b Cache size: #{human_size @stats[:cache_size]}
+    h3.ui.header
+      ' Last tags
+      = link_to '(See All)', tags_path, class: 'ui small'
+    table.ui.celled.table
+      thead
+        th ID
+        th Name
+        th Aliases
+        th Images
+        th Actions
+      - @tags.each do |tag|
+        tr
+          td = tag.id
+          td = tag.name
+          td = tag.aliases.join(', ')
+          td = tag.taggings.count
+          td
+            = link_to 'Edit', edit_tag_path(tag), class: 'btn btn-success'
+            /= link_to 'Destroy', tag, class: 'btn btn-danger'
+.ui.vertical.stripe.segment
+  .ui.container
+    b Total Images: #{@stats[:images_count]}
+    br
+    b Images size: #{human_size @stats[:images_size]}
+    br
+    b Cache size: #{human_size @stats[:cache_size]}

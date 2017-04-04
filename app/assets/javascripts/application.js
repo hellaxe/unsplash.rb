@@ -13,6 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require dropzone
-//= require select2
+//= require semantic-ui
 //= require_tree .
 

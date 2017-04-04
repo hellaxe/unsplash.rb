@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    meta content=('text/html; charset=UTF-8') http-equiv="Content-Type" /
+    title Unsplash
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+  body.pushable
+    .ui.large.top.fixed.menu.transition.hidden
+      .ui.container
+        a.active href="/" Dashboard
+        a href="" Tags
+        a href="" Images
+        a href="" Connections
+    .pusher
+      = yield
+

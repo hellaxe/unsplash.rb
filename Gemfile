@@ -9,7 +9,8 @@ gem 'bundler', '>= 1.8.4'
 gem 'rails', '~> 5.0.1'
 gem 'pg'
 gem 'puma', '~> 3.0'
-gem 'sass-rails', '~> 5.0'
+# gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
@@ -18,12 +19,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'mini_magick'
 gem 'carrierwave'
 gem 'slim'
-gem 'bootstrap-sass'
+gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'kaminari'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-underscore'
-  gem 'rails-assets-select2'
 end
 
 group :development, :test do

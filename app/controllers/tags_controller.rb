@@ -1,11 +1,15 @@
 class TagsController < ApplicationController
   def index
-    if params[:q].present?
-      @tags = Tag.ilike(params[:q])
+    @tags =
+      if params[:q].present?
+        Tag.ilike(params[:q]).page(params[:page]).per(10)
+      else
+        Tag.all.page(params[:page]).per(10)
+      end
 
-      render json: {items: @tags.map { |t| {id: t.id, name: t.name } }}.to_json
-    else
-      @tags = Tag.all.page(params[:page])
+    respond_to do |format|
+      format.json { render json: { success: true, results: @tags.map {|t| { name: t.name, value: t.id } } }.to_json }
+      format.html
     end
   end
 

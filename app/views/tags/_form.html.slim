@@ -1,0 +1,10 @@
+= form_for tag, html: { class: 'ui form' } do |form|
+  .field
+    label Name
+    = form.text_field :name, placeholder: 'Tag Name', autofocus: true
+  .field
+    label Aliases
+    = form.text_area :virtual_aliases, hint: 'use comma to separate aliases', placeholder: 'Tag Aliases'
+    .muted.small Use comma to separate aliases
+
+  = form.submit 'Save', class: 'ui button green'

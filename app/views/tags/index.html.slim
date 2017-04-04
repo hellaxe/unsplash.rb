@@ -1,18 +1,21 @@
-= link_to 'New', new_tag_path, class: 'btn btn-success'
-table.table.table-hover.table-bordered
-  thead
-    th ID
-    th Name
-    th Aliases
-    th Images
-    th Actions
-  - @tags.each do |tag|
-    tr
-      td = tag.id
-      td = tag.name
-      td = tag.aliases.join(', ')
-      td = tag.taggings.count
-      td
-        = link_to 'Edit', edit_tag_path(tag), class: 'btn btn-success'
-        = link_to 'Destroy', tag
-= paginate @tags
+.ui.vertical.stripe.segment
+  .ui.container
+    = link_to new_tag_path, class: 'ui button green' do
+      i.tag.icon
+      | New Tag
+    table.ui.celled.table
+      thead
+        th ID
+        th Name
+        th Aliases
+        th Images
+        th Actions
+      - @tags.each do |tag|
+        tr
+          td = tag.id
+          td = tag.name
+          td = tag.aliases.join(', ')
+          td = tag.taggings.count
+          td
+            = link_to 'Edit', edit_tag_path(tag), class: 'btn btn-success'
+    = paginate @tags
