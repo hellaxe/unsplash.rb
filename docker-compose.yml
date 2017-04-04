@@ -1,0 +1,20 @@
+postgres:
+  image: postgres:9.4.5
+  environment:
+    POSTGRES_USER: test
+    POSTGRES_PASSWORD: 123
+  ports:
+    - '6543:5432'
+  volumes:
+    - drkiq-postgres:/var/lib/postgresql/data
+
+unsplash:
+  build: .
+  links:
+    - postgres
+  volumes:
+    - .:/unsplash
+  ports:
+    - '8000:3000'
+  env_file:
+    - .unsplash.env
